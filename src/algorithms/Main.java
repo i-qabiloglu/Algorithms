@@ -3,15 +3,7 @@ package algorithms;
 public class Main {
 
     public static void main(String[] args) {
-        int[] arr = {99, 56, 0, 42, 6, 32, 32, 69, -7};
-        bubleSort(arr);
 
-        for (int num : arr) {
-            System.out.println(num);
-        }
-
-//        System.out.println(fiboRecursive(15));
-//        System.out.println(fibonacci(15));
     }
 
     public static void bubleSort(int... numbers) {
@@ -43,6 +35,22 @@ public class Main {
             return numIndex;
 
         return fiboRecursive(numIndex - 1) + fiboRecursive(numIndex - 2);
+    }
+
+    public static int binarySearch(int[] arr, int searchedElem) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left <= right) {
+            int mid = (right - left) / 2 + left;
+            if (searchedElem == arr[mid]) {
+                return mid;
+            } else if (searchedElem > arr[mid]) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return -1;
     }
 }
 
