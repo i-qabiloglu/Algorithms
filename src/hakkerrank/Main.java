@@ -1,5 +1,7 @@
 package hakkerrank;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Main {
@@ -52,4 +54,26 @@ public class Main {
 
         return arr;
     }
+
+    //    There is a collection of input strings and a collection of query strings. For each query string, determine
+    //    how many times it occurs in the list of input strings. Return an array of the results.
+    public static List<Integer> matchingStrings(List<String> strings, List<String> queries) {
+        List<Integer> results = new ArrayList<>();
+
+        for (int i = 0; i < queries.size(); i++) {
+            results.add(0);
+            Integer count = 0;
+            for (int j = 0; j < strings.size(); j++) {
+                if (queries.get(i).equals(strings.get(j))) {
+                    count++;
+                }
+            }
+            results.set(i, count);
+        }
+
+        return results;
+    }
+
+
 }
+
