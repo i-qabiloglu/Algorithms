@@ -1,24 +1,19 @@
 package algorithms;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class Main {
 
     public static void main(String[] args) {
         int[] arr = {16, 11, 14, 8, 2, 7, 14};
 
-        quickSort(arr, 0, arr.length - 1);
-        for (int num : arr) {
+        int[] arrRes = mergeSort(arr);
+        for (int num : arrRes) {
             System.out.println(num);
         }
 
     }
 
-    public static <T extends Number, V extends String> void testGen(List<T> number, ArrayList<V> arrayList) {
-        System.out.println(number.size());
-        System.out.println(arrayList.size());
-    }
 
     public static void swap(int[] arr, int i, int j) {
         arr[i] += arr[j];
@@ -71,6 +66,7 @@ public class Main {
 
     // time complexity- O(nlog(n))(worst case- O(n^2)), space complexity- O(1)
     public static void quickSort(int[] arr, int beginIndex, int endIndex) {
+
         if (beginIndex >= endIndex)
             return;
 
@@ -87,6 +83,51 @@ public class Main {
         swap(arr, counter, pivot);
         quickSort(arr, beginIndex, counter - 1);
         quickSort(arr, counter + 1, endIndex);
+    }
+
+    // time complexity- O(nlog(n)), space complexity- O(1) or O(n)
+    public static int[] mergeSort(int[] arr) {
+        if (arr.length <= 1)
+            return arr;
+
+        int midPoint = arr.length / 2;
+        int[] leftSortedArray = mergeSort(Arrays.copyOfRange(arr, 0, midPoint));
+        int[] rightSortedArray = mergeSort(Arrays.copyOfRange(arr, midPoint, arr.length));
+
+        return mergeSortedArrays(leftSortedArray, rightSortedArray);
+
+    }
+
+    public static int[] mergeSortedArrays(int[] arrFirst, int[] arrSecond) {
+        int n1 = 0;
+        int n2 = 0;
+        int k = 0;
+        int[] result = new int[arrFirst.length + arrSecond.length];
+
+        while (n1 < arrFirst.length && n2 < arrSecond.length) {
+
+            if (arrFirst[n1] < arrSecond[n2]) {
+                result[k] = arrFirst[n1];
+                n1++;
+            } else {
+                result[k] = arrSecond[n2];
+                n2++;
+            }
+            k++;
+        }
+
+        while (n1 < arrFirst.length) {
+            result[k] = arrFirst[n1];
+            n1++;
+            k++;
+        }
+        while (n2 < arrSecond.length) {
+            result[k] = arrSecond[n2];
+            n2++;
+            k++;
+        }
+
+        return result;
     }
 
     public static int fibonacci(int numIndex) {
