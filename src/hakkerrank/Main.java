@@ -74,6 +74,8 @@ public class Main {
         return results;
     }
 
-
+    public static void testMethodB() {
+        System.out.println("testMethodB");
+    }
 }
 
